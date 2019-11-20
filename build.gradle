@@ -1,0 +1,59 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "io.franzbecker:gradle-lombok:3.2.0"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.1.0'
+    }
+}
+repositories {
+    mavenCentral()
+}
+apply plugin: 'java'
+apply plugin: "io.franzbecker.gradle-lombok"
+apply plugin: "com.github.johnrengelman.shadow"
+
+group = 'myclaim'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = 11
+
+dependencies {
+    implementation platform("org.springframework.boot:spring-boot-dependencies:2.2.0.RELEASE")
+
+    // managed by spring boot
+    implementation("org.awaitility:awaitility")
+    implementation("org.springframework:spring-beans")
+    implementation("org.springframework:spring-context:5.2.1.RELEASE")
+    implementation("org.springframework.security:spring-security-core:5.2.1.RELEASE")
+    implementation("org.springframework.boot:spring-boot-starter-web:2.2.1.RELEASE")
+    implementation("org.apache.commons:commons-lang3")
+    implementation("org.assertj:assertj-core")
+    implementation("org.slf4j:slf4j-api")
+    implementation("ch.qos.logback:logback-classic")
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+    implementation("org.apache.httpcomponents:fluent-hc")
+    implementation("commons-logging:commons-logging")
+    implementation("com.google.code.gson:gson")
+    implementation("com.google.firebase:firebase-admin:6.10.0")
+    // upgraded from spring boot
+    implementation("com.squareup.okhttp3:okhttp:4.2.2")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.2.2")
+    implementation("com.squareup.okhttp3:okhttp-urlconnection:4.2.2")
+    implementation("org.bouncycastle:bcprov-jdk15on:1.64")
+    implementation("org.bouncycastle:bcpkix-jdk15on:1.64")
+    implementation("com.google.guava:guava:28.1-jre")
+
+    // not in spring boot
+    implementation("org.seleniumhq.selenium:selenium-java:3.141.59")
+    implementation("org.junit.platform:junit-platform-console-standalone:1.4.2")
+    implementation("org.mock-server:mockserver-netty:5.7.0") {
+        exclude group: "junit", module: "junit"
+    }
+    test {
+        useJUnitPlatform()
+    }
+ }
